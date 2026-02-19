@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dimanche 1er mars — Un moment rien qu'à nous</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============================================================
+       VARIABLES
+    ============================================================ */
+    :root {
+      --night: #0d1b2a;
+      --deep: #1b263b;
+      --accent: #5390d9;
+      --light: #e0e7ef;
+      --white: #ffffff;
+      --muted: #9db4c8;
+      --spotlight: rgba(83, 144, 217, 0.12);
+      --font-serif: 'Playfair Display', serif;
+      --font-sans: 'Lato', sans-serif;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--night);
+      color: var(--light);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 15%, var(--spotlight) 0%, transparent 65%),
+                  linear-gradient(180deg, var(--night) 0%, var(--deep) 100%);
+    }
+
+    /* Spotlight cinematique */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: 50%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(83,144,217,0.22) 0%, transparent 68%);
+      transform: translateX(-50%);
+      animation: spotlightMove 10s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes spotlightMove {
+      0%   { opacity: 0.35; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0.65; transform: translateX(-50%) translateY(-40px); }
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 650px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-photo {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 35px;
+      border: 4px solid var(--accent);
+      box-shadow: 0 10px 50px rgba(83,144,217,0.4),
+                  0 0 70px rgba(83,144,217,0.18);
+      animation: photoFadeIn 1.2s ease-out;
+    }
+
+    @keyframes photoFadeIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 18px;
+      letter-spacing: 0.01em;
+      animation: fadeDown 1.2s ease-out 0.2s both;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-25px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.7;
+      animation: fadeUp 1.2s ease-out 0.4s both;
+    }
+
+    .hero-text {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--light);
+      line-height: 1.95;
+      margin-bottom: 45px;
+      animation: fadeUp 1.2s ease-out 0.6s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(25px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 17px 45px;
+      background: linear-gradient(135deg, var(--accent), #6ba3e8);
+      color: var(--white);
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 60px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 35px rgba(83,144,217,0.45);
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: fadeUp 1.2s ease-out 0.8s both;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 50px rgba(83,144,217,0.55);
+    }
+
+    /* ============================================================
+       MESSAGE SECTION
+    ============================================================ */
+    .message {
+      padding: 110px 24px;
+      background: var(--deep);
+      text-align: center;
+    }
+
+    .message-content {
+      max-width: 750px;
+      margin: 0 auto;
+      font-family: var(--font-serif);
+      font-size: clamp(1.35rem, 3.2vw, 1.9rem);
+      line-height: 2.1;
+      color: var(--light);
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .message-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .message-footer {
+      margin-top: 40px;
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    /* ============================================================
+       FORM SECTION
+    ============================================================ */
+    .form-section {
+      padding: 110px 24px;
+      background: linear-gradient(180deg, var(--deep) 0%, var(--night) 100%);
+    }
+
+    .form-card {
+      max-width: 680px;
+      margin: 0 auto;
+      background: rgba(27, 38, 59, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(83,144,217,0.22);
+      border-radius: 24px;
+      padding: 55px 45px;
+      box-shadow: 0 12px 60px rgba(0,0,0,0.35);
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .form-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .form-card h2 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      color: var(--white);
+      margin-bottom: 40px;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
+    .form-group {
+      margin-bottom: 36px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1.08rem;
+      font-weight: 500;
+      color: var(--light);
+      margin-bottom: 14px;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(83,144,217,0.18);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.28s ease;
+    }
+
+    .radio-option:hover {
+      background: rgba(83,144,217,0.12);
+      border-color: var(--accent);
+    }
+
+    .radio-option input[type="radio"] {
+      width: 19px;
+      height: 19px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .radio-option label {
+      margin: 0;
+      cursor: pointer;
+      flex: 1;
+      font-weight: 400;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 110px;
+      padding: 15px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(83,144,217,0.22);
+      border-radius: 12px;
+      color: var(--light);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      resize: vertical;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(83,144,217,0.06);
+    }
+
+    textarea::placeholder {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 15px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(83,144,217,0.22);
+      border-radius: 12px;
+      color: var(--light);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    input[type="email"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(83,144,217,0.06);
+    }
+
+    input[type="email"]::placeholder {
+      color: var(--muted);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 17px;
+      background: linear-gradient(135deg, var(--accent), #6ba3e8);
+      color: var(--white);
+      font-family: var(--font-sans);
+      font-size: 1.15rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      box-shadow: 0 10px 35px rgba(83,144,217,0.45);
+      transition: all 0.35s ease;
+      margin-top: 24px;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 45px rgba(83,144,217,0.55);
+    }
+
+    .confirmation {
+      margin-top: 24px;
+      padding: 18px;
+      background: rgba(83,144,217,0.18);
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+      text-align: center;
+      color: var(--light);
+      font-size: 1.08rem;
+      display: none;
+      animation: fadeUp 0.6s ease;
+    }
+
+    .confirmation.show {
+      display: block;
+    }
+
+    .btn-back {
+      margin-top: 16px;
+      padding: 13px 32px;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 60px;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background: rgba(83,144,217,0.12);
+    }
+
+    /* ============================================================
+       SECTION FINALE
+    ============================================================ */
+    .final-section {
+      padding: 110px 24px;
+      background: var(--night);
+      text-align: center;
+    }
+
+    .final-content {
+      max-width: 700px;
+      margin: 0 auto;
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 3vw, 1.85rem);
+      line-height: 2.1;
+      color: var(--light);
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .final-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      padding: 70px 24px;
+      background: var(--night);
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .heart {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 1.5rem;
+      animation: heartPulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.18); }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 600px) {
+      .hero { padding: 60px 20px; }
+      .hero h1 { font-size: 2.2rem; }
+      .form-card { padding: 40px 28px; }
+      .message-content { font-size: 1.35rem; }
+      .final-content { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero-content">
+      <img src="photo.jpg" alt="Photo" class="hero-photo">
+      <h1>Dimanche 1er mars — Un moment rien qu'à nous</h1>
+      <p class="hero-subtitle">
+        Je t'ai préparé quelque chose de simple…<br>
+        mais sincère.
+      </p>
+      <p class="hero-text">
+        J'aimerais t'inviter au cinéma.<br>
+        Pas juste pour regarder un film,<br>
+        mais pour partager un vrai moment avec toi.
+      </p>
+      <a href="#form" class="btn-primary">Répondre</a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MESSAGE
+  ============================================================ -->
+  <section class="message">
+    <div class="message-content" data-observe>
+      Je ne veux pas revenir avec du bruit.<br>
+      Je ne veux pas compliquer ta vie.<br><br>
+
+      Je veux juste être honnête, calmement…<br><br>
+
+      Tu me manques.<br>
+      Pas seulement dans les mots,<br>
+      mais dans les petits détails du quotidien.<br><br>
+
+      Et ce dimanche, j'aimerais qu'on se voie.<br>
+      Qu'on se parle.<br>
+      Qu'on sourie un peu.<br>
+      Qu'on respire, juste.<br><br>
+
+      Si tu es d'accord,<br>
+      je voudrais qu'on passe du temps ensemble…<br>
+      sans pression,<br>
+      juste avec du vrai.
+      
+      <p class="message-footer">Peu importe ta réponse, merci d'être là.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FORMULAIRE
+  ============================================================ -->
+  <section class="form-section" id="form">
+    <div class="form-card" data-observe>
+      <h2>Quelques questions</h2>
+
+      <form action="https://formspree.io/f/mnjbbdae" method="POST" id="mainForm">
+        <input type="hidden" name="_subject" value="Réponses — Invitation Cinéma (Dimanche 1er mars)">
+        <input type="hidden" name="_captcha" value="false">
+
+        <!-- Q1 -->
+        <div class="form-group">
+          <label>Quel genre de film te ferait plaisir ?</label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="film1" name="film" value="Comédie">
+              <label for="film1">Comédie</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="film2" name="film" value="Romantique">
+              <label for="film2">Romantique</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="film3" name="film" value="Action">
+              <label for="film3">Action</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="film4" name="film" value="Horreur">
+              <label for="film4">Horreur</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="film5" name="film" value="Surprise (tu choisis)">
+              <label for="film5">Surprise (tu choisis)</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="form-group">
+          <label>On se fait un petit repas…</label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="eat1" name="repas" value="Avant le cinéma">
+              <label for="eat1">Avant le cinéma</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="eat2" name="repas" value="Après le cinéma">
+              <label for="eat2">Après le cinéma</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="eat3" name="repas" value="Les deux">
+              <label for="eat3">Les deux</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="eat4" name="repas" value="Juste le cinéma">
+              <label for="eat4">Juste le cinéma</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="form-group">
+          <label>Après le film, tu préfères…</label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="after1" name="apres" value="Rentrer tranquillement">
+              <label for="after1">Rentrer tranquillement</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="after2" name="apres" value="Marcher un peu">
+              <label for="after2">Marcher un peu</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="after3" name="apres" value="Boire un verre">
+              <label for="after3">Boire un verre</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="after4" name="apres" value="Continuer le moment ensemble">
+              <label for="after4">Continuer le moment ensemble</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="form-group">
+          <label>Est-ce que ça te ferait plaisir qu'on partage ce moment ?</label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="plaisir1" name="plaisir" value="Oui">
+              <label for="plaisir1">Oui</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="plaisir2" name="plaisir" value="Peut-être">
+              <label for="plaisir2">Peut-être</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="plaisir3" name="plaisir" value="On verra">
+              <label for="plaisir3">On verra</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="form-group">
+          <label for="message">Un petit mot pour moi…</label>
+          <textarea id="message" name="message" placeholder="Écris ce que tu veux… même un mot, ça me fera plaisir."></textarea>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Ton email (optionnel)</label>
+          <input type="email" id="email" name="email" placeholder="Ton email (optionnel)">
+        </div>
+
+        <button type="submit" class="btn-submit">Envoyer 💙</button>
+      </form>
+
+      <div class="confirmation" id="confirmation">
+        <p>Merci… ça me fait vraiment plaisir 💙</p>
+        <button class="btn-back" onclick="window.scrollTo({top:0,behavior:'smooth'})">Retour en haut</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION FINALE
+  ============================================================ -->
+  <section class="final-section">
+    <div class="final-content" data-observe>
+      Merci d'avoir pris le temps.<br><br>
+
+      Je ne cherche pas à forcer quoi que ce soit.<br>
+      Je voulais juste que tu saches une chose :<br><br>
+
+      Tu comptes pour moi.<br>
+      Et j'aimerais retrouver, même un peu,<br>
+      ce lien qu'on avait…<br><br>
+
+      Ce dimanche,<br>
+      si tu le veux,<br>
+      on se fait un beau moment.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <p>Peu importe la suite… merci.</p>
+    <span class="heart">♥</span>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // Fade-in au scroll avec IntersectionObserver
+    const observerOptions = { threshold: 0.18 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-observe]').forEach(el => observer.observe(el));
+
+    // Confirmation après envoi (sans empêcher Formspree)
+    const form = document.getElementById('mainForm');
+    const confirmation = document.getElementById('confirmation');
+
+    form.addEventListener('submit', function() {
+      setTimeout(() => {
+        confirmation.classList.add('show');
+      }, 600);
+    });
+  </script>
+
+</body>
+</html>
